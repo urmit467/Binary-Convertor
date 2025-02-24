@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+
+    }
+
+    .container {
+        background-image: url('image.png');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size:cover;
+        
+        /* background: linear-gradient(135deg, #0e0f23 0%, #14091e 50%, #781a49 100%); */
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .box {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        margin: 20px;
+        left: 50px;
+
+    }
+
+    .text1,
+    .text2 {
+        background: none;
+        color: #4b5563;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: static;
+        width: auto;
+        margin: 0 0 8px 0;
+        padding: 0;
+    }
+
+    #option1,
+    #option2 {
+        width: calc(50% - 10px);
+        margin: 0;
+        padding: 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 0.75rem;
+        background: white;
+        font-size: 1rem;
+        color: #1f2937;
+        transition: all 0.2s ease;
+        appearance: none;
+        cursor: pointer;
+    }
+
+    #option1 {
+        float: left;
+        margin-right: 10px;
+    }
+
+    #option2 {
+        float: right;
+        margin-left: 10px;
+    }
+
+    #option1:hover,
+    #option2:hover {
+        border-color: #818cf8;
+        box-shadow: 0 2px 6px rgba(99, 102, 241, 0.1);
+    }
+
+    .value {
+        position: static;
+        color: #4b5563;
+        font-weight: 500;
+        margin: 2rem 0 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    #input1_1 {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        background: white;
+        transition: all 0.2s ease;
+        margin: 0;
+        position: static;
+    }
+
+    #input1_1:focus {
+        outline: none;
+        border-color: #818cf8;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    #convertbutton {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #6366f1 0%, #6245a5 100%);
+        color: white;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        margin: 2rem 0;
+        position: static;
+    }
+
+    #convertbutton:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+    }
+
+    #text_output {
+        position: static;
+        color: #4b5563;
+        font-weight: 500;
+        margin: 0 0 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    #output {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e5e7eb;
+        border-radius: 0.75rem;
+        font-size: 1.1rem;
+        background: white;
+        color: #1f2937;
+        resize: vertical;
+        min-height: 100px;
+        position: static;
+        margin: 0;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        .box {
+            padding: 1.5rem;
+            margin: 10px;
+            border-radius: 1rem;
+        }
+
+        #option1,
+        #option2 {
+            width: 100%;
+            float: none;
+            margin: 0 0 1rem 0;
+        }
+    }
+
+
+    select {
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1em;
+    }
+
+    #text_1 {
+        font: bold;
+        backdrop-filter: blur(25px);
+        /* background: rgba(255, 255, 255, 0.1); */
+        margin-left: 350px;
+        width: 450px;
+        font-size: x-large;
+        color: black;
+        border: 3px solid;
+        border-color: black;
+        text-align: center;
+    }
+</style>
+
+
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="text1">
+                Conversion
+                from
+            </div>
+            <div class="text2">
+                Conversion To
+            </div>
+            <select id="option1">
+                <option value="decimal">decimal</option>
+                <option value="binary">Binary</option>
+                <option value="hexadecimal">Hexadecimal</option>
+            </select>
+
+            <select id="option2">
+                <option value="binary">Binary</option>
+                <option value="decimal">decimal</option>
+                <option value="hexadecimal">Hexadecimal</option>
+            </select>
+            <div class="value">
+                ENTER THE VALUE
+            </div>
+            <input id="input1_1" placeholder="Enter a number">
+            <button id="convertbutton">CONVERT</button>
+            <div id="text_output">
+                VALUE
+            </div>
+            <textarea id="output" readonly> RESULT </textarea>
+
+        </div>
+        <div id="text_1">
+            1. Decimal to Binary
+            Steps:
+            Divide the decimal number by 2.
+            Record the remainder.
+            Repeat the division process with the quotient until the quotient becomes 0.
+            The binary number is the remainders read from bottom to top.
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
